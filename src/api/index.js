@@ -1,5 +1,6 @@
 import { comments, commits } from './github';
 import _, { merge } from 'lodash';
+import storage from 'storage';
 
 const owner = 'shri-2015-org';
 // const repo = 'activity';
@@ -47,6 +48,12 @@ function processCommits(commitPromises) {
 }
 
 export function get(projects, mockComments, mockCommits) {
+    const stored = storage.get();
+
+    if (stored) {
+        return stored;
+    }
+
     const commentPromises = mockComments || projects.map(repo => comments(owner, repo));
     const commitPromises = mockCommits || projects.map(repo => commits(owner, repo));
 
@@ -66,6 +73,7 @@ export function get(projects, mockComments, mockCommits) {
                 : 0;
         });
 
+        storage.put(data.users);
         return data.users;
     });
 }
