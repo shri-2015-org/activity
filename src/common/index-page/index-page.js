@@ -1,4 +1,8 @@
 import './index.styl';
 import { get } from '../../api';
 
-get();
+const projects = [
+    'activity'
+];
+
+get(projects).then(response => console.log);
