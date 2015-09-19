@@ -1,0 +1,47 @@
+{
+  "name": "activity",
+  "description": "",
+  "version": "0.0.0",
+  "author": "Andrey Morozov <alt-j@yandex-team.ru>",
+  "contributors": [
+    {
+      "name": "Alexey Litvinov",
+      "email": "iamhoneyboy@gmail.com"
+    }
+  ],
+  "repository": "https://github.com/shri-2015-org/activity",
+  "devDependencies": {
+    "autoprefixer-loader": "1.0.0",
+    "babel-core": "5.8.23",
+    "babel-loader": "5.3.2",
+    "chai": "1.9.2",
+    "core-js": "1.1.4",
+    "css-loader": "0.9.0",
+    "eslint": "1.3.1",
+    "git-hooks": "1.0.0",
+    "html-webpack-plugin": "1.6.1",
+    "jscs": "2.1.1",
+    "karma": "0.13.9",
+    "karma-cli": "0.1.0",
+    "karma-mocha": "0.2.0",
+    "karma-phantomjs-launcher": "0.2.1",
+    "karma-sinon-chai": "1.0.0",
+    "karma-webpack": "1.7.0",
+    "mocha": "2.0.1",
+    "mocha-loader": "0.7.0",
+    "phantomjs": "1.9.18",
+    "sinon": "1.9.1",
+    "style-loader": "0.8.2",
+    "stylus-loader": "0.4.0",
+    "webpack": "1.4.13",
+    "webpack-dev-server": "1.10.1"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack -p",
+    "validate": "npm run lint && npm run test",
+    "lint": "jscs . && eslint .",
+    "test": "karma start karma.conf.js"
+  },
+  "license": "MIT"
+}
