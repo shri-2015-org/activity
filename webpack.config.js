@@ -4,7 +4,7 @@ var environment = process.env.NODE_ENV || 'development';
 
 module.exports = {
     entry: {
-        main: __dirname + '/src/js/boot.js'
+        main: __dirname + '/src/common/index-page/index-page.js'
     },
     output: {
         path: __dirname + '/build',
@@ -31,9 +31,9 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            inject: 'body',
+            inject: 'head',
             filename: 'index.html',
-            template: __dirname + '/src/index.html'
+            template: __dirname + '/src/common/index-page/index-page.html'
         }),
         new webpack.DefinePlugin({'process.env.NODE_ENV': '"' + environment + '"'}),
         new webpack.optimize.DedupePlugin(),
