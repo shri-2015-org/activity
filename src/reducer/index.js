@@ -1,8 +1,13 @@
 import { SHOW } from '../actions';
+import {assign} from 'lodash';
 
-export default function reducer(state, action) {
+const initialState = {
+    data: {}
+};
+
+export default function reducer(state = initialState, action) {
     if (action.type === SHOW) {
-        state = action.data;
+        state.data = assign({}, action.data);
     }
     return state;
 }

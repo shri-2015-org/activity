@@ -3,13 +3,13 @@ import {createStore} from 'redux';
 import React, {render} from 'react';
 
 import {get} from './api';
-import show from './actions';
+import {show} from './actions';
 import Container from './components/container';
 
 const store = createStore(reducer);
 
-get().then(([receivedComments, receivedCommits]) => {
-    const action = show([receivedComments, receivedCommits]);
+get(['activity']).then((response) => {
+    const action = show(response);
     store.dispatch(action);
 });
 
