@@ -22,5 +22,5 @@ git checkout -- .
 
 git_cached_files=$(git diff --cached --name-only --diff-filter=ACMR | grep "\.js$")
 if [ "$git_cached_files" ]; then
-    npm run validate --silent || exit 1
+    npm run lint --silent || exit 1
 fi

@@ -6,17 +6,17 @@ const API_URL = 'https://api.github.com';
 const parsedURL = parse(API_URL);
 
 export function comments(owner, repo) {
-  var newParsedUrl = assign({}, parsedURL, {
-    pathname: `repos/${owner}/${repo}/comments`
-  });
+    var newParsedUrl = assign({}, parsedURL, {
+        pathname: `repos/${owner}/${repo}/comments`
+    });
 
-  return fetch(format(newParsedUrl));
+    return fetch(format(newParsedUrl));
 }
 
 export function commits(owner, repo) {
-  var newParsedUrl = assign({}, parsedURL, {
-    pathname: `repos/${owner}/${repo}/commits`
-  });
+    var newParsedUrl = assign({}, parsedURL, {
+        pathname: `repos/${owner}/${repo}/commits`
+    });
 
-  return fetch(format(newParsedUrl));
+    return fetch(format(newParsedUrl));
 }

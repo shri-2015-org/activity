@@ -39,9 +39,11 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack -p",
-    "validate": "npm run lint && npm run test",
-    "lint": "jscs . && eslint .",
+    "lint": "jscs --esnext . && eslint .",
     "test": "karma start karma.conf.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^3.10.1"
+  }
 }
