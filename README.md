@@ -1,1 +1,3 @@
 # Activity
+
+Students activity visualization.

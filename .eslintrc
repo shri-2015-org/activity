@@ -6,7 +6,8 @@
         "mocha": true
     },
     "ecmaFeatures": {
-        "modules": true
+        "modules": true,
+        "jsx": true
     },
     "globals": {
         "require": true,
