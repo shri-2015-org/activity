@@ -1,7 +1,8 @@
 export const SHOW = 'SHOW';
 
-export function show() {
+export function show(data) {
     return {
-        type: SHOW
+        type: SHOW,
+        data: data
     };
 }
