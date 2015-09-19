@@ -19,9 +19,9 @@ describe('get()', () => {
     it('should return valid response', () => forEach(response, (desc, login) => {
         ok(login);
         ok(result(desc, 'avatar'), 'should have "avatar" property');
-        ok(result(desc, 'commits'), 'should have "commits" property');
-        equal(typeof result(desc, 'commits'), 'number');
-        ok(result(desc, 'comments'), 'should have "comments" property');
-        equal(typeof result(desc, 'comments'), 'number');
+        ok(desc.commits !== undefined, 'should have "commits" property');
+        equal(typeof desc.commits, 'number');
+        ok(desc.comments !== undefined, 'should have "comments" property');
+        equal(typeof desc.comments, 'number');
     }));
 });

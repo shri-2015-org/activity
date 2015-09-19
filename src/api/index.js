@@ -4,10 +4,10 @@ import _, { merge } from 'lodash';
 const owner = 'shri-2015-org';
 // const repo = 'activity';
 
-function processComments(commitPromises) {
-    return Promise.all(commitPromises)
-        .then(receivedCommits => {
-            const users = _(receivedCommits)
+function processComments(commentPromises) {
+    return Promise.all(commentPromises)
+        .then(receivedComments => {
+            const users = _(receivedComments)
                 .flatten()
                 .pluck('author')
                 .value()
@@ -21,7 +21,7 @@ function processComments(commitPromises) {
                     return users;
                 }, {});
 
-            return users;
+            return {comments: receivedComments.length, users};
         });
 }
 
@@ -42,7 +42,7 @@ function processCommits(commitPromises) {
                     return users;
                 }, {});
 
-            return users;
+            return {commits: receivedCommits.length, users};
         });
 }
 
@@ -55,11 +55,17 @@ export function get(projects, mockComments, mockCommits) {
         processCommits(commitPromises)
     ])
     .then(([usersWithCommets, usersWithCommits]) => {
-        const users = _(usersWithCommets)
-            .merge(usersWithCommits)
-            .forEach((desc, login) => {})
-            .value();
+        const data = _.merge(usersWithCommets, usersWithCommits);
+        _.forEach(data.users, (desc, login) => {
+            desc.comments = desc.comments && data.comments
+                ? desc.comments / data.comments
+                : 0;
 
-        return users;
+            desc.commits = desc.commits && desc.commits
+                ? desc.commits / data.commits
+                : 0;
+        });
+
+        return data.users;
     });
 }
