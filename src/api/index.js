@@ -1,6 +1,6 @@
 import { comments, commits } from './github';
 import _, { merge } from 'lodash';
-import storage from 'storage';
+import * as storage from './storage';
 
 const owner = 'shri-2015-org';
 // const repo = 'activity';

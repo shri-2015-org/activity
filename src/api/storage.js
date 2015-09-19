@@ -17,5 +17,5 @@ export function put(store) {
         return;
     }
 
-    window.localStorage.setItm('activity', JSON.stringify(store));
+    window.localStorage.setItem('activity', JSON.stringify(store));
 }
