@@ -2,8 +2,8 @@ import './index.styl';
 
 import React from 'react';
 
-export default ({children}) => {
+export default ({content}) => {
     return (
-        <h1 className='header'>{children}</h1>
+        <h1 className='header'>{content}</h1>
     );
 };

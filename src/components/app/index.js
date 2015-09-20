@@ -3,15 +3,15 @@ import './index.styl';
 import {connect} from 'react-redux';
 import React from 'react';
 import Header from '../header';
-import Table from '../table';
+import List from '../list';
 
-const TableConnected = connect(state => ({data: state.data}))(Table);
+const ListConnected = connect(state => ({data: state.data}))(List);
 
 export default props => {
     return (
         <div className='application'>
-            <Header>Students activity visualization.</Header>
-            <TableConnected />
+            <Header>Students activity visualization</Header>
+            <ListConnected />
         </div>
     );
 };

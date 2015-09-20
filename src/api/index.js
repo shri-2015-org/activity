@@ -51,7 +51,7 @@ export function get(projects, mockComments, mockCommits) {
     const stored = storage.get();
 
     if (stored) {
-        return stored;
+        return Promise.resolve(stored);
     }
 
     const commentPromises = mockComments || projects.map(repo => comments(owner, repo));
