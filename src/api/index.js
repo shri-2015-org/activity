@@ -31,6 +31,9 @@ function processCommits(commitPromises) {
         .then(receivedCommits => {
             const users = _(receivedCommits)
                 .flatten()
+                .reject((commit) => {
+                  return commit.author === null;
+                })
                 .pluck('author')
                 .value()
                 .reduce((users, commit) => {
