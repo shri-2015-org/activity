@@ -10,15 +10,15 @@ function processComments(commentPromises) {
         .then(receivedComments => {
             const users = _(receivedComments)
                 .flatten()
-                .pluck('author')
+                .pluck('user')
                 .value()
-                .reduce((users, commit) => {
-                    const name = commit.login;
-                    users[name] || (users[name] = {avatar: commit.avatar_url});
+                .reduce((users, comment) => {
+                    const name = comment.login;
+                    users[name] || (users[name] = {avatar: comment.avatar_url});
                     const user = users[name];
-                    user.commits || (user.commits = 0);
+                    user.comments || (user.comments = 0);
 
-                    user.commits++;
+                    user.comments++;
                     return users;
                 }, {});
 
@@ -61,8 +61,8 @@ export function get(projects, mockComments, mockCommits) {
         processComments(commentPromises),
         processCommits(commitPromises)
     ])
-    .then(([usersWithCommets, usersWithCommits]) => {
-        const data = _.merge(usersWithCommets, usersWithCommits);
+    .then(([usersWithComments, usersWithCommits]) => {
+        const data = _.merge(usersWithComments, usersWithCommits);
         _.forEach(data.users, (desc, login) => {
             desc.comments = desc.comments && data.comments
                 ? desc.comments / data.comments
