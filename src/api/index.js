@@ -8,32 +8,40 @@ const owner = 'shri-2015-org';
 function processComments(commentPromises) {
     return Promise.all(commentPromises)
         .then(receivedComments => {
-            const users = _(receivedComments)
+            let usersList = _(receivedComments)
                 .flatten()
-                .pluck('author')
-                .value()
-                .reduce((users, commit) => {
-                    const name = commit.login;
-                    users[name] || (users[name] = {avatar: commit.avatar_url});
+                .pluck('user')
+                .value();
+            const length = usersList.length;
+            const users = usersList.reduce((users, comment) => {
+                    if (comment === undefined) {
+                      return null;
+                    }
+                    const name = comment.login;
+                    users[name] || (users[name] = {avatar: comment.avatar_url});
                     const user = users[name];
-                    user.commits || (user.commits = 0);
+                    user.comments || (user.comments = 0);
 
-                    user.commits++;
+                    user.comments++;
                     return users;
                 }, {});
 
-            return {comments: receivedComments.length, users};
+            return {comments: length, users};
         });
 }
 
 function processCommits(commitPromises) {
     return Promise.all(commitPromises)
         .then(receivedCommits => {
-            const users = _(receivedCommits)
+            let usersList = _(receivedCommits)
                 .flatten()
+                .reject((commit) => {
+                  return commit.author === null;
+                })
                 .pluck('author')
-                .value()
-                .reduce((users, commit) => {
+                .value();
+            const length = usersList.length;
+            const users = usersList.reduce((users, commit) => {
                     const name = commit.login;
                     users[name] || (users[name] = {avatar: commit.avatar_url});
                     const user = users[name];
@@ -43,7 +51,7 @@ function processCommits(commitPromises) {
                     return users;
                 }, {});
 
-            return {commits: receivedCommits.length, users};
+            return {commits: length, users};
         });
 }
 
@@ -61,8 +69,8 @@ export function get(projects, mockComments, mockCommits) {
         processComments(commentPromises),
         processCommits(commitPromises)
     ])
-    .then(([usersWithCommets, usersWithCommits]) => {
-        const data = _.merge(usersWithCommets, usersWithCommits);
+    .then(([usersWithComments, usersWithCommits]) => {
+        const data = _.merge(usersWithComments, usersWithCommits);
         _.forEach(data.users, (desc, login) => {
             desc.comments = desc.comments && data.comments
                 ? desc.comments / data.comments
